@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { Send, Bot, User } from "lucide-react";
+import { Send, Bot, User, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar";
-import { getResponse } from "@/lib/knowledgeBase";
+import { supabase } from "@/integrations/supabase/client";
 
 interface Message {
   id: string;
@@ -44,21 +44,36 @@ const Chat = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const userQuery = inputValue;
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate typing delay for natural feel
-    setTimeout(() => {
-      const response = getResponse(inputValue);
+    try {
+      const { data, error } = await supabase.functions.invoke('campus-chat', {
+        body: { query: userQuery }
+      });
+
+      if (error) throw error;
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        content: response,
+        content: data.response || "I'm sorry, I couldn't process your request. Please try again.",
         isBot: true,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error('Chat error:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        content: "I'm having trouble connecting right now. Please try again in a moment.",
+        isBot: true,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 800);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -69,7 +84,6 @@ const Chat = () => {
   };
 
   const formatMessage = (content: string) => {
-    // Convert markdown-style bold to actual styling
     return content.split('\n').map((line, i) => {
       const parts = line.split(/(\*\*.*?\*\*)/g);
       return (
@@ -93,7 +107,12 @@ const Chat = () => {
       <main className="flex-1 container mx-auto px-4 py-6 flex flex-col max-w-4xl">
         {/* Chat Header */}
         <div className="text-center mb-6 animate-fade-in">
-          <h1 className="font-serif text-2xl md:text-3xl font-bold text-foreground mb-2">
+          <div className="flex justify-center mb-3">
+            <div className="w-12 h-12 rounded-2xl bg-accent flex items-center justify-center">
+              <MessageCircle className="w-6 h-6 icon-blue" />
+            </div>
+          </div>
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
             Chat with CampusQuery
           </h1>
           <p className="text-sm text-muted-foreground">
@@ -102,18 +121,18 @@ const Chat = () => {
         </div>
 
         {/* Messages Container */}
-        <div className="flex-1 bg-card rounded-xl border border-border shadow-sm p-4 mb-4 overflow-y-auto min-h-[400px] max-h-[500px]">
+        <div className="flex-1 bg-card rounded-2xl border border-border shadow-sm p-4 mb-4 overflow-y-auto min-h-[400px] max-h-[500px]">
           <div className="space-y-4">
             {messages.map((message) => (
               <div
                 key={message.id}
                 className={`flex items-start gap-3 animate-slide-in ${message.isBot ? "" : "flex-row-reverse"}`}
               >
-                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${message.isBot ? "bg-accent" : "bg-primary"}`}>
+                <div className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center ${message.isBot ? "bg-accent" : "bg-primary"}`}>
                   {message.isBot ? (
-                    <Bot className="w-4 h-4 text-accent-foreground" />
+                    <Bot className="w-5 h-5 icon-blue" />
                   ) : (
-                    <User className="w-4 h-4 text-primary-foreground" />
+                    <User className="w-5 h-5 text-primary-foreground" />
                   )}
                 </div>
                 <div className={message.isBot ? "chat-message-bot" : "chat-message-user"}>
@@ -126,14 +145,14 @@ const Chat = () => {
             
             {isTyping && (
               <div className="flex items-start gap-3 animate-slide-in">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent flex items-center justify-center">
-                  <Bot className="w-4 h-4 text-accent-foreground" />
+                <div className="flex-shrink-0 w-9 h-9 rounded-full bg-accent flex items-center justify-center">
+                  <Bot className="w-5 h-5 icon-blue" />
                 </div>
                 <div className="chat-message-bot">
-                  <div className="flex gap-1">
-                    <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                    <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                    <span className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                  <div className="flex gap-1.5">
+                    <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+                    <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+                    <span className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
                   </div>
                 </div>
               </div>
@@ -149,8 +168,8 @@ const Chat = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyPress}
-            placeholder="Type your question here..."
-            className="flex-1 py-6 px-4 text-base rounded-xl"
+            placeholder="Ask your question..."
+            className="flex-1 py-6 px-5 text-base rounded-xl border-2"
           />
           <Button 
             onClick={handleSend}

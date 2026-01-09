@@ -2,45 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 210 33% 96%;
-    --foreground: 200 50% 15%;
+    --background: 220 20% 97%;
+    --foreground: 220 20% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 200 50% 15%;
+    --card-foreground: 220 20% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 200 50% 15%;
+    --popover-foreground: 220 20% 20%;
 
-    --primary: 192 52% 24%;
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 25% 92%;
-    --secondary-foreground: 200 50% 15%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 20% 20%;
 
-    --muted: 210 25% 93%;
-    --muted-foreground: 200 20% 45%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 46%;
 
-    --accent: 192 45% 90%;
-    --accent-foreground: 192 52% 24%;
+    --accent: 217 91% 95%;
+    --accent-foreground: 217 91% 50%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 25% 88%;
-    --input: 210 25% 88%;
-    --ring: 192 52% 24%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217 91% 60%;
 
     --radius: 0.75rem;
 
-    --icon-bg: 192 45% 90%;
-    --icon-fg: 192 52% 24%;
-
-    --chat-user: 192 52% 24%;
-    --chat-bot: 210 25% 93%;
+    --icon-color: 217 91% 55%;
   }
 }
 
@@ -54,14 +50,14 @@
     font-family: 'Inter', sans-serif;
   }
 
-  h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
   }
 }
 
 @layer components {
   .nav-link {
-    @apply px-4 py-2 text-sm font-medium text-foreground/80 hover:text-foreground transition-colors rounded-lg;
+    @apply px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-lg;
   }
 
   .nav-link-active {
@@ -69,26 +65,30 @@
   }
 
   .category-card {
-    @apply bg-card rounded-xl p-8 border border-border/50 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 cursor-pointer flex flex-col items-center text-center gap-4;
+    @apply bg-card rounded-2xl p-8 border border-border shadow-sm hover:shadow-lg hover:border-primary/30 transition-all duration-300 cursor-pointer flex flex-col items-center text-center gap-4;
   }
 
   .icon-circle {
-    @apply w-14 h-14 rounded-xl bg-accent flex items-center justify-center text-accent-foreground;
+    @apply w-14 h-14 rounded-2xl bg-accent flex items-center justify-center;
+  }
+
+  .icon-blue {
+    @apply text-[hsl(217,91%,55%)];
   }
 
   .info-card {
-    @apply bg-card rounded-xl p-6 border border-border/50 shadow-sm;
+    @apply bg-card rounded-2xl p-6 border border-border shadow-sm;
   }
 
   .step-badge {
-    @apply w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold;
+    @apply w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center text-base font-semibold;
   }
 
   .chat-message-user {
-    @apply bg-primary text-primary-foreground rounded-2xl rounded-br-md px-4 py-3 max-w-[80%] ml-auto;
+    @apply bg-primary text-primary-foreground rounded-2xl rounded-br-sm px-5 py-3 max-w-[80%] ml-auto shadow-sm;
   }
 
   .chat-message-bot {
-    @apply bg-muted text-foreground rounded-2xl rounded-bl-md px-4 py-3 max-w-[80%];
+    @apply bg-muted text-foreground rounded-2xl rounded-bl-sm px-5 py-3 max-w-[80%] shadow-sm;
   }
 }

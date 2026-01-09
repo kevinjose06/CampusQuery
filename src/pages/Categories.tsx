@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Clock, DollarSign, Building2, PartyPopper, FileText } from "lucide-react";
+import { BookOpen, Clock, CreditCard, Building2, Calendar, FileCheck, LayoutGrid } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 interface Category {
@@ -13,8 +13,8 @@ const Categories = () => {
   const categories: Category[] = [
     {
       icon: BookOpen,
-      title: "Exam Rules",
-      description: "Examination procedures, schedules, and eligibility criteria",
+      title: "Exam Registration & Fee Deadlines",
+      description: "Registration deadlines, fee amounts, and late fee information",
       id: "exam"
     },
     {
@@ -24,28 +24,28 @@ const Categories = () => {
       id: "attendance"
     },
     {
-      icon: DollarSign,
-      title: "Fee Deadlines",
-      description: "Payment schedules, methods, and scholarship information",
-      id: "fees"
-    },
-    {
       icon: Building2,
       title: "Department Information",
       description: "Faculty details, facilities, and contact information",
       id: "department"
     },
     {
-      icon: PartyPopper,
-      title: "College Events",
+      icon: Calendar,
+      title: "College & Department Events",
       description: "Upcoming fests, symposiums, and club activities",
       id: "events"
     },
     {
-      icon: FileText,
+      icon: FileCheck,
       title: "Condonation",
       description: "Shortage condonation process and requirements",
       id: "condonation"
+    },
+    {
+      icon: CreditCard,
+      title: "General Exam Rules",
+      description: "Examination procedures, schedules, and eligibility",
+      id: "examrules"
     }
   ];
 
@@ -55,7 +55,12 @@ const Categories = () => {
       
       <main className="container mx-auto px-4 py-12 md:py-16">
         <div className="text-center mb-12 animate-fade-in">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <div className="flex justify-center mb-4">
+            <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center">
+              <LayoutGrid className="w-7 h-7 icon-blue" />
+            </div>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
             Choose a Category
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -72,7 +77,7 @@ const Categories = () => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="icon-circle">
-                <category.icon className="w-6 h-6" />
+                <category.icon className="w-7 h-7 icon-blue" />
               </div>
               <h3 className="font-semibold text-lg text-foreground">{category.title}</h3>
               <p className="text-sm text-muted-foreground">{category.description}</p>

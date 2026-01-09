@@ -1,4 +1,4 @@
-import { HelpCircle, MessageSquare, AlertCircle } from "lucide-react";
+import { HelpCircle, MessageSquare, AlertCircle, List } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 const Help = () => {
@@ -16,7 +16,7 @@ const Help = () => {
     {
       number: 3,
       title: "Get Instant Answers",
-      description: "The bot will analyze your question and provide relevant information from the college knowledge base."
+      description: "The AI will analyze your question and provide relevant information from the college knowledge base."
     },
     {
       number: 4,
@@ -53,8 +53,13 @@ const Help = () => {
       
       <main className="container mx-auto px-4 py-12 md:py-16 max-w-4xl">
         <div className="text-center mb-12 animate-fade-in">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Help & User Guide
+          <div className="flex justify-center mb-4">
+            <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center">
+              <HelpCircle className="w-7 h-7 icon-blue" />
+            </div>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Help & Support
           </h1>
           <p className="text-lg text-muted-foreground">
             Learn how to get the most out of CampusQuery
@@ -62,10 +67,10 @@ const Help = () => {
         </div>
 
         {/* How to Use */}
-        <section className="mb-12 animate-fade-in" style={{ animationDelay: "100ms" }}>
+        <section className="mb-10 animate-fade-in" style={{ animationDelay: "100ms" }}>
           <div className="flex items-center gap-3 mb-6">
             <div className="icon-circle">
-              <HelpCircle className="w-5 h-5" />
+              <List className="w-6 h-6 icon-blue" />
             </div>
             <h2 className="font-semibold text-xl text-foreground">How to Use CampusQuery</h2>
           </div>
@@ -82,24 +87,24 @@ const Help = () => {
         </section>
 
         {/* Sample Questions */}
-        <section className="mb-12 animate-fade-in" style={{ animationDelay: "200ms" }}>
+        <section className="mb-10 animate-fade-in" style={{ animationDelay: "200ms" }}>
           <div className="info-card">
             <div className="flex items-center gap-3 mb-4">
               <div className="icon-circle">
-                <MessageSquare className="w-5 h-5" />
+                <MessageSquare className="w-6 h-6 icon-blue" />
               </div>
               <h2 className="font-semibold text-xl text-foreground">Sample Questions</h2>
             </div>
             <p className="text-muted-foreground mb-4">
               Here are some examples of questions you can ask:
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {sampleQuestions.map((question, index) => (
                 <div 
                   key={index}
-                  className="flex items-center gap-2 px-3 py-2 bg-background rounded-lg border border-border text-sm"
+                  className="flex items-center gap-3 px-4 py-3 bg-background rounded-xl border border-border text-sm"
                 >
-                  <span className="text-primary">→</span>
+                  <span className="text-primary font-bold">→</span>
                   <span className="text-foreground">{question}</span>
                 </div>
               ))}
@@ -108,14 +113,14 @@ const Help = () => {
         </section>
 
         {/* Supported Topics */}
-        <section className="mb-12 animate-fade-in" style={{ animationDelay: "300ms" }}>
+        <section className="mb-10 animate-fade-in" style={{ animationDelay: "300ms" }}>
           <div className="info-card">
             <h2 className="font-semibold text-xl text-foreground mb-4">Supported Topics</h2>
             <div className="flex flex-wrap gap-2">
               {supportedTopics.map((topic, index) => (
                 <span 
                   key={index}
-                  className="px-3 py-1.5 bg-accent text-accent-foreground rounded-full text-sm"
+                  className="px-4 py-2 bg-accent text-accent-foreground rounded-full text-sm font-medium"
                 >
                   {topic}
                 </span>
@@ -126,12 +131,12 @@ const Help = () => {
 
         {/* Disclaimer */}
         <section className="animate-fade-in" style={{ animationDelay: "400ms" }}>
-          <div className="info-card bg-accent/50 border-primary/20">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+          <div className="info-card bg-accent/30 border-primary/20">
+            <div className="flex items-start gap-4">
+              <AlertCircle className="w-6 h-6 icon-blue flex-shrink-0 mt-0.5" />
               <div>
                 <h3 className="font-semibold text-foreground mb-2">Disclaimer</h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   CampusQuery provides information based on its knowledge base and should be used as a 
                   helpful reference. For official confirmations regarding deadlines, fees, or procedures, 
                   please verify with the relevant college department or the official college website. 
