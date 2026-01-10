@@ -192,6 +192,9 @@ This project is for educational and hackathon purposes.
 ![About Page](C:\Users\angel\OneDrive\Pictures\Screenshots\4.png)
 ![Help Page](C:\Users\angel\OneDrive\Pictures\Screenshots\5.png)
 
+#Demo URL
+
+https://campusquery.vercel.app/
 
 
 > *CampusQuery – One stop solution for all your campus queries* 🎓
