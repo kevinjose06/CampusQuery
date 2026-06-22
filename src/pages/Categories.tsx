@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Clock, CreditCard, Building2, Calendar, FileCheck, LayoutGrid } from "lucide-react";
+import { BookOpen, Clock, CreditCard, Building2, Calendar, FileCheck, LayoutGrid, Trophy, GraduationCap } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 interface Category {
@@ -46,6 +46,24 @@ const Categories = () => {
       title: "General Exam Rules",
       description: "Examination procedures, schedules, and eligibility",
       id: "examrules"
+    },
+    {
+      icon: GraduationCap,
+      title: "Minors & Honours",
+      description: "B.Tech Minors & Honours registration, eligibility, and courses",
+      id: "minors_honours"
+    },
+    {
+      icon: BookOpen,
+      title: "CSE Syllabus & Curriculum",
+      description: "Semester course structures, credits, self-study, and marks",
+      id: "curriculum"
+    },
+    {
+      icon: Trophy,
+      title: "Student Activity Points",
+      description: "Guidelines and detailed point allocations for NCC, NSS, and fests",
+      id: "activity_points"
     }
   ];
 

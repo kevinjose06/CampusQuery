@@ -72,6 +72,33 @@ const categoryConfigs: Record<string, { title: string; welcome: string; suggesti
       { label: "📵 Electronic Gadgets", query: "Are phones or calculators allowed in exams?" },
       { label: "🚫 Misconduct Policy", query: "What happens in case of misconduct in exams?" }
     ]
+  },
+  minors_honours: {
+    title: "Minors & Honours",
+    welcome: "👋 Hello! I see you are interested in **B.Tech Minors & Honours Regulations**.\n\nI can provide details on minor offering branches, student eligibility, registration rules, credits distribution, and honours requirements.\n\nWhat would you like to know about Minors or Honours?",
+    suggestions: [
+      { label: "🎓 Honours Eligibility", query: "What are the eligibility criteria for B.Tech Honours?" },
+      { label: "🛠️ Minor Offering Branches", query: "Which branches offer B.Tech Minors?" },
+      { label: "📊 Minors Credit Structure", query: "How are the 15 Minor credits distributed?" }
+    ]
+  },
+  curriculum: {
+    title: "CSE Syllabus & Curriculum",
+    welcome: "👋 Hello! I see you are interested in **CSE Syllabus & Curriculum**.\n\nI can show you semester-wise course details, L-T-P-R structures, credits, marks, and self-study hours for the KTU 2024 scheme.\n\nWhat semester syllabus would you like to view?",
+    suggestions: [
+      { label: "📚 S1 CSE Syllabus", query: "Show me the S1 CSE syllabus." },
+      { label: "💻 S3 CSE Courses", query: "What are the courses in S3 CSE?" },
+      { label: "📖 Program Electives PE-1", query: "What are the elective courses under PE-1?" }
+    ]
+  },
+  activity_points: {
+    title: "Student Activity Points",
+    welcome: "👋 Hello! I see you are interested in **Student Activity Points**.\n\nI can explain the points requirements for graduation (Regular/Lateral/PwD) and detailed point allocations for NSS, NCC, blood donation, hackathons, and skilling courses.\n\nWhat would you like to ask about Activity Points?",
+    suggestions: [
+      { label: "🎖️ Activity Point Groups", query: "What are the activity point groups?" },
+      { label: "🩸 Blood Donation Points", query: "How many points do I get for blood donation?" },
+      { label: "🏆 Smart India Hackathon", query: "How many points for winning Smart India Hackathon?" }
+    ]
   }
 };
 
@@ -105,7 +132,7 @@ const Chat = () => {
       setMessages([
         {
           id: "welcome",
-          content: "👋 Hello! I'm CampusQuery, your AI campus assistant.\n\nI can help you with exam registration, fee deadlines, attendance rules, department information, college events, and condonation procedures.\n\nWhat would you like to know?",
+          content: "👋 Hello! I'm CampusQuery, your AI campus assistant.\n\nI can help you with exam registration, fee deadlines, attendance rules, department information, college events, condonation procedures, B.Tech minors & honours, CSE curriculum, and student activity points.\n\nWhat would you like to know?",
           isBot: true,
           timestamp: new Date()
         }
